@@ -1,8 +1,5 @@
-var Git = require("git-fs");
+var fs = require('fs');
 var express = require('express');
-
-var app = express.createServer();
-var port = 8080;
 
 function parseArticle(text) {
     var props = {};
@@ -62,24 +59,25 @@ function processArticles(articles, id) {
 function fetchArticle(id, callback) {
     var articles = [];
 
-	Git.getHead(function(err, sha) {
-		Git.readDir(sha, ".", function(err, results) {
-            results.files.forEach(function onFile(filename) {
-                Git.readFile(sha, filename, function(err, buffer) {
-                    var text = buffer.toString();
+	fs.readdir("articles", function(err, files) {
+        files.forEach(function(filename) {
+            fs.readFile("articles/" + filename, function(err, data) {
+                var text = data.toString();
 
-                    var parsed = parseArticle(text);
-                    parsed.id = filename;
-                    articles.push(parsed);
+                var parsed = parseArticle(text);
+                parsed.id = filename;
+                articles.push(parsed);
 
-                    if (articles.length == results.files.length) {
-                       callback(processArticles(articles, id));
-                    }
-                });
+                if (articles.length == files.length) {
+                    callback(processArticles(articles, id));
+                }
             });
-	    });
+        });
 	});
 }
+
+var app = express.createServer();
+var port = 8080;
 
 app.get('/article/:id?', function(req, res) {
     fetchArticle(req.params.id, function(article) {
@@ -98,7 +96,5 @@ app.configure(function(){
 app.configure("production", function(){
     port = 80;
 });
-
-Git("articles");
 
 app.listen(port);
