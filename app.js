@@ -93,8 +93,7 @@ app.configure(function(){
     app.use(express.static(__dirname + '/public'));
 });
 
-app.configure("production", function(){
-    port = 80;
+var port = process.env.PORT || 3000;
+app.listen(port, function() {
+    console.log("Listening on " + port);
 });
-
-app.listen(port);
