@@ -16,7 +16,7 @@ function parseArticle(text) {
 
 function sortArticlesByDate(articles) {
 	articles.sort(function(a, b) {
-	    return (Date.parse(a.props.date)) - (Date.parse(b.props.date));
+	    return Date.parse(a.props.date) - Date.parse(b.props.date);
 	});
 }
 
