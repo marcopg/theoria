@@ -3,5 +3,12 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "2.5.9"
+  },
+  "subdomain": "theoria",
+  "scripts": {
+    "start": "app.js"
+  },
+  "engines": {
+    "node": "0.6.x"
   }
 }
