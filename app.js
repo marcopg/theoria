@@ -46,6 +46,11 @@ function findArticleById(articles, id) {
     return result;
 }
 
+function createArticleLink(article) {
+    return { id: article.id,
+             title: article.props.title };
+}
+
 function processArticles(articles, id) {
     sortArticlesByDate(articles);
 
@@ -60,11 +65,11 @@ function processArticles(articles, id) {
     var article = articles[index];
 
     if (index > 0) {
-        article.previous = articles[index - 1].id;
+        article.previous = createArticleLink(articles[index - 1]);
     }
 
     if (index < articles.length - 1) {
-        article.next = articles[index + 1].id;
+        article.next = createArticleLink(articles[index + 1]);
     }
 
     return article;

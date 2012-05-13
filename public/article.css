@@ -1,7 +1,7 @@
 body {
     font-family: "Droid Sans", Helvetica, Arial, sans-serif;
-    margin-left: 15%;
-	margin-right: 15%;
+    margin-left: 80px;
+	margin-right: 160px;
 }
 
 h1 {
@@ -24,3 +24,27 @@ h1 {
     border-top: 2px solid #DDDDDD;
 }
 
+#links {
+    top: 100px;
+    right: 0px;
+    position: fixed;
+}
+
+#links a {
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 3px 10px;
+    width: 120px;
+    display: block;
+}
+
+#links a.next {
+    background-color: red;
+    color: white;
+}
+
+#links a.previous {
+    background-color: red;
+    color: white;
+}

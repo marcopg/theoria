@@ -1,7 +1,45 @@
 var currentArticle;
 
+function renderLinks(article) {
+    var links = [];
+
+    var next = article.next;
+    if (next) {
+        links.push({ title: next.title,
+                     href: "/#" + next.id,
+                     type: "next" });
+    }
+
+    var previous = article.previous;
+    if (previous) {
+        links.push({ title: previous.title,
+                     href: "/#" + previous.id,
+                     type: "previous" });
+    }
+
+    var linksDiv = document.getElementById("links");
+
+    while (linksDiv.firstChild) {
+        linksDiv.removeChild(linksDiv.firstChild);
+    }
+
+    links.forEach(function(link) {
+        var a = document.createElement("a");
+        a.setAttribute("href", link.href);
+        a.setAttribute("class", link.type);
+        linksDiv.appendChild(a);
+
+        var textNode = document.createTextNode(link.title);
+        a.appendChild(textNode);
+    });
+}
+
 function renderReferences(article) {
     var referencesDiv = document.getElementById("references");
+
+    while (referencesDiv.firstChild) {
+        referencesDiv.removeChild(referencesDiv.firstChild);
+    }
 
     article.props.reference.forEach(function(referenceText) {
         var p = document.createElement("p");
@@ -38,6 +76,7 @@ function renderArticle(article) {
 
     renderContent(article.text);
     renderReferences(article);
+    renderLinks(article);
 
     currentArticle = article.id;
 
