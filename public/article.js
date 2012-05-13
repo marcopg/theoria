@@ -78,6 +78,9 @@ function renderArticle(article) {
     renderReferences(article);
     renderLinks(article);
 
+    var articleDiv = document.getElementById("article");
+    articleDiv.style.visibility = "visible";
+
     currentArticle = article.id;
 
     if (!window.location.hash) {
