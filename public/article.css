@@ -1,4 +1,5 @@
 body {
+    font-family: "Droid Sans", Helvetica, Arial, sans-serif;
     margin-left: 15%;
 	margin-right: 15%;
 }
@@ -7,11 +8,19 @@ h1 {
     font-family: "Droid Serif", Georgia, Times, serif;
     font-size: 49px;
     border-bottom: 2px solid #DDDDDD;
+    margin-bottom: 30px;
 }
- 
+
 #content {
-    font-family: "Droid Sans", Helvetica, Arial, sans-serif;
     font-size: 19px;
     line-height: 28px;
     text-align: justify;
 }
+
+#references {
+    color: #888888;
+    font-size: 12px;
+    margin-top: 30px;
+    border-top: 2px solid #DDDDDD;
+}
+

@@ -1,20 +1,32 @@
 var currentArticle;
 
+function renderReferences(article) {
+    var referencesDiv = document.getElementById("references");
+
+    article.props.reference.forEach(function(referenceText) {
+        var p = document.createElement("p");
+        referencesDiv.appendChild(p);
+
+        var textNode = document.createTextNode(referenceText);
+        p.appendChild(textNode);
+    });
+}
+
 function renderContent(text) {
     var content = document.getElementById("content");
-    
+
     while (content.firstChild) {
         content.removeChild(content.firstChild);
     }
-    
+
     paragraphs = text.split("\n\n");
-    for (var i = 0; i < paragraphs.length; i++) { 
+    paragraphs.forEach(function(paragraphText) {
         var p = document.createElement("p");
         content.appendChild(p);
 
-        var text = document.createTextNode(paragraphs[i]);
-        p.appendChild(text);
-    }
+        var textNode = document.createTextNode(paragraphText);
+        p.appendChild(textNode);
+    });
 }
 
 function renderArticle(article) {
@@ -25,6 +37,7 @@ function renderArticle(article) {
     title.replaceChild(titleText, title.firstChild);
 
     renderContent(article.text);
+    renderReferences(article);
 
     currentArticle = article.id;
 
@@ -42,11 +55,11 @@ function fetchArticle() {
 
     function onReadyStateChange() {
         if(this.readyState == this.DONE) {
-            renderArticle(JSON.parse(this.responseText));            
+            renderArticle(JSON.parse(this.responseText));
         }
     }
-    
-    var path = "article/"; 
+
+    var path = "article/";
     if (window.location.hash) {
         path += id;
     }

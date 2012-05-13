@@ -3,10 +3,24 @@ var express = require('express');
 
 function parseArticle(text) {
     var props = {};
+    var multiple = {};
     var match;
 
     while(match = text.match(/^([a-z]+):\s*(.*)\s*\n/i)) {
-        props[match[1].toLowerCase()] = match[2];
+        var key = match[1].toLowerCase();
+        var value = match[2];
+
+        if (key in props) {
+            if (!(key in multiple)) {
+                multiple[key] = [props[key]];
+                props[key] = multiple[key];
+            }
+
+            multiple[key].push(value);
+        } else {
+            props[key] = value;
+        }
+
         text = text.substr(match[0].length);
     }
 
