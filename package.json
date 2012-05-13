@@ -1,6 +1,6 @@
 {
   "name": "theoria",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "dependencies": {
     "express": "2.5.9"
   },
