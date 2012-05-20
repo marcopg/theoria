@@ -41,6 +41,13 @@ function renderReferences(article) {
         referencesDiv.removeChild(referencesDiv.firstChild);
     }
 
+    if (!article.props.reference) {
+        referencesDiv.style.visibility = "hidden";
+        return;
+    }
+
+    referencesDiv.style.visibility = "visible";
+
     article.props.reference.forEach(function(referenceText) {
         var p = document.createElement("p");
         referencesDiv.appendChild(p);
